@@ -37,7 +37,7 @@ namespace Lab36Cameron.Controllers
 
         //Post
         [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Post([FromBody]SongItem item)
         {
             //Posting item to Db
@@ -50,7 +50,51 @@ namespace Lab36Cameron.Controllers
             return CreatedAtAction("Get", new { id = item.Id }, item);
         }
 
+        //Put
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put(int id, [FromBody]SongItem item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //find item by id
+            var check = _context.SongItem.FirstOrDefault(i => i.Id == id);
+
+            //updates an item in the database by id
+            if (check != null)
+            {
+                check.Title = item.Title;
+                _context.Update(check);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+
+        //Delete Action
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var check = _context.SongItem.FirstOrDefault(i => i.Id == id);
+
+            //Removes item based off given id
+            if(check != null)
+            {
+                _context.Remove(check);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
 
     }
 
+
 }
+
