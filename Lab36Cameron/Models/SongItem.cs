@@ -8,7 +8,7 @@ namespace Lab36Cameron.Models
 {
     public class SongItem
     {
-        [Key]
+        
         public int Id { get; set; }
         public string Title { get; set; }
         public bool IsComplete { get; set; }
