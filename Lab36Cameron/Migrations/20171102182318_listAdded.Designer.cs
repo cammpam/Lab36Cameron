@@ -11,9 +11,10 @@ using System;
 namespace Lab36Cameron.Migrations
 {
     [DbContext(typeof(SongEntryDbContext))]
-    partial class SongEntryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171102182318_listAdded")]
+    partial class listAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +42,8 @@ namespace Lab36Cameron.Migrations
 
                     b.Property<int?>("ContributorsId");
 
+                    b.Property<int?>("ContributorsId1");
+
                     b.Property<int>("FeatId");
 
                     b.Property<bool>("IsComplete");
@@ -51,14 +54,20 @@ namespace Lab36Cameron.Migrations
 
                     b.HasIndex("ContributorsId");
 
+                    b.HasIndex("ContributorsId1");
+
                     b.ToTable("SongItem");
                 });
 
             modelBuilder.Entity("Lab36Cameron.Models.SongItem", b =>
                 {
                     b.HasOne("Lab36Cameron.Models.Contributors")
-                        .WithMany("PlayList")
+                        .WithMany("Artist")
                         .HasForeignKey("ContributorsId");
+
+                    b.HasOne("Lab36Cameron.Models.Contributors")
+                        .WithMany("Producer")
+                        .HasForeignKey("ContributorsId1");
                 });
 #pragma warning restore 612, 618
         }
