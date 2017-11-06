@@ -11,9 +11,10 @@ using System;
 namespace Lab36Cameron.Migrations
 {
     [DbContext(typeof(SongEntryDbContext))]
-    partial class SongEntryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171102190046_ListUpdated")]
+    partial class ListUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

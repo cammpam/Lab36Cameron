@@ -15,5 +15,6 @@ namespace Lab36Cameron.Data
         }
 
         public DbSet<SongItem> SongItem { get; set; }
+        public DbSet<Contributors> Contributors { get; set; }
     }
 }
